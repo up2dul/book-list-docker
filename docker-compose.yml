@@ -1,0 +1,28 @@
+# Specify the version of the docker-compose file format
+version: '3.8'
+# Define the services that will be run in containers
+services:
+  # Define a service named "backend"
+  backend:
+    # Specify the build context as the "./backend" directory
+    build: ./backend
+    # Set the name of the container to "backend"
+    container_name: backend-c
+    # Expose ports from the container to the host
+    ports:
+      # Map port 4000 on the host to port 4000 on the container
+      - '4000:4000'
+    # Mount volumes from the host to the container
+    volumes:
+      # Mount the "./backend" directory on the host to the "/app" directory in the container
+      - ./backend:/app
+      - /app/node_modules
+  frontend:
+    build: ./frontend
+    container_name: frontend-c
+    ports:
+      - '5173:5173'
+    # Allows interaction with the container through stdin
+    stdin_open: true
+    # Allocates a pseudo-TTY for the container
+    tty: true
