@@ -7,7 +7,7 @@ function App() {
   useEffect(() => {
     fetch('http://localhost:4000/books')
       .then((res) => res.json())
-      .then((data) => setBooks(data));
+      .then(({ data }) => setBooks(data));
   }, []);
 
   return (
